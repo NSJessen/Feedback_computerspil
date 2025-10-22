@@ -48,8 +48,13 @@ public class Player {
         this.score = score;
     }
 
-    public void displayDetails() {
-
+    public void displayDetails(Player player) {
+        Tools.printToConsole("--------------------"
+                + "\nPlayer ID: " + player.getPlayerId()
+                + "\nName: " + player.getName()
+                + "\nAge: " + player.getAge()
+                + "\nScore: " + player.getScore()
+                + "\n--------------------");
     }
 
     public void updateScore(double newScore) {

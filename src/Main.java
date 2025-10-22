@@ -205,6 +205,21 @@ public class Main {
         GameSystem.addGame("Phasmophobia", "Horror", 13.99);
     }
 
+    private static void addInitialPlayers(){
+        GameSystem.addPlayer("Havre", 26, 1337.69);
+        GameSystem.addPlayer("Ravn", 31, 982.45);
+        GameSystem.addPlayer("Luna", 22, 1543.10);
+        GameSystem.addPlayer("Blitz", 28, 867.32);
+        GameSystem.addPlayer("Nova", 19, 1204.77);
+        GameSystem.addPlayer("Echo", 35, 2010.55);
+        GameSystem.addPlayer("Pixel", 24, 945.88);
+        GameSystem.addPlayer("Rune", 27, 1111.11);
+        GameSystem.addPlayer("Kiro", 30, 1723.64);
+        GameSystem.addPlayer("Mira", 23, 1349.50);
+        GameSystem.addPlayer("Storm", 29, 999.99);
+        GameSystem.addPlayer("Vex", 21, 1402.73);
+    }
+
     private static void promptAddGame() {
         String title;
         Tools.titlePrinter("ADD GAME", true);

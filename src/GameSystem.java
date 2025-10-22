@@ -22,7 +22,7 @@ public class GameSystem {
 
     }
 
-    public void addPlayer(String name, int age, double score) {
+    public static void addPlayer(String name, int age, double score) {
         usedPlayerIds++;
         players.add(new Player((usedPlayerIds), name, age, score));
 
