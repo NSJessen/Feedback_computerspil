@@ -87,6 +87,7 @@ public class Main {
                     1... Display all games
                     2... Add game
                     3... Find game by ID
+                    4... Edit game
                     
                     0... Back to main menu
                     """);
@@ -106,6 +107,9 @@ public class Main {
                     break;
                 case 3:
                     promptFindGameById();
+                    break;
+                case 4:
+                    promptEditGame();
                     break;
                 default:
                     Tools.printToConsole("Invalid input. Try again.");
@@ -133,6 +137,59 @@ public class Main {
             Tools.waitForUser(input);
         }
     }
+
+    private static void promptEditGame(){
+        Tools.titlePrinter("EDIT GAME", true);
+
+        System.out.println("Enter Game ID to edit: ");
+        int gameId = input.nextInt();
+        input.nextLine();
+
+        Game game = GameSystem.findGameById(gameId);
+
+        if (game == null){
+            Tools.printToConsole("No game with that ID was found. Try again.");
+            Tools.waitForUser(input);
+            return;
+        }
+
+        Tools.printToConsole("Game found: ");
+        GameSystem.displayGame(game);
+
+        System.out.println("New title: ");
+        String newTitle = input.nextLine().trim();
+        if (!newTitle.isEmpty()){
+            game.setTitle(newTitle);
+        }
+
+        System.out.println("New genre: ");
+        String newGenre = input.nextLine().trim();
+        if (!newGenre.isEmpty()){
+            game.setGenre(newGenre);
+        }
+
+        System.out.println("New price: ");
+        String priceInput = input.nextLine().trim().replace(",",".");
+        if (!priceInput.isEmpty()){
+            try {
+                double newPrice = Double.parseDouble(priceInput);
+                if (newPrice >= 0) {
+                    game.setPrice(newPrice);
+                } else {
+                    System.out.println("Price can't be negative. Game will keep it's current price. ");
+                }
+            } catch (NumberFormatException e){
+                System.out.println("Invalid price input. Game will keep it's current price. ");
+            }
+        }
+
+        Tools.printToConsole("Game has been updated: ");
+        GameSystem.displayGame(game);
+        Tools.waitForUser(input);
+
+    }
+
+
 
     private static void addInitialGames() {
         GameSystem.addGame("Minecraft", "Survival", 39.99);
@@ -203,4 +260,5 @@ public class Main {
         GameSystem.addGame(title, genre, price);
 
     }
+
 }
