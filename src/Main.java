@@ -136,7 +136,7 @@ public class Main {
         }
     }
 
-    private static void promptEditGame(){
+    private static void promptEditGame() {
         Tools.titlePrinter("EDIT GAME", true);
 
         System.out.println("Enter Game ID to edit: ");
@@ -145,7 +145,7 @@ public class Main {
 
         Game game = GameSystem.findGameById(gameId);
 
-        if (game == null){
+        if (game == null) {
             Tools.printToConsole("No game with that ID was found. Try again.");
             Tools.waitForUser(input);
             return;
@@ -156,19 +156,19 @@ public class Main {
 
         System.out.println("New title: ");
         String newTitle = input.nextLine().trim();
-        if (!newTitle.isEmpty()){
+        if (!newTitle.isEmpty()) {
             game.setTitle(newTitle);
         }
 
         System.out.println("New genre: ");
         String newGenre = input.nextLine().trim();
-        if (!newGenre.isEmpty()){
+        if (!newGenre.isEmpty()) {
             game.setGenre(newGenre);
         }
 
         System.out.println("New price: ");
-        String priceInput = input.nextLine().trim().replace(",",".");
-        if (!priceInput.isEmpty()){
+        String priceInput = input.nextLine().trim().replace(",", ".");
+        if (!priceInput.isEmpty()) {
             try {
                 double newPrice = Double.parseDouble(priceInput);
                 if (newPrice >= 0) {
@@ -176,7 +176,7 @@ public class Main {
                 } else {
                     System.out.println("Price can't be negative. Game will keep it's current price. ");
                 }
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid price input. Game will keep it's current price. ");
             }
         }
@@ -186,7 +186,6 @@ public class Main {
         Tools.waitForUser(input);
 
     }
-
 
 
     private static void addInitialGames() {
