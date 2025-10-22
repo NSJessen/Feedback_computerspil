@@ -20,36 +20,31 @@ public class Game {
         return gameId;
     }
 
-    public void setGameId(int gameId){
-
-    }
+    public void setGameId(int gameId){this.gameId = gameId;}
 
     public String getTitle(){
         return title;
     }
 
-    public void setTitle(String title){
-
-    }
+    public void setTitle(String title){this.title = title;}
 
     public String getGenre(){
         return genre;
     }
 
-    public void setGenre(){
-
-    }
+    public void setGenre(String genre){this.genre = genre;}
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price){
-
-    }
+    public void setPrice(double price){this.price = price;}
 
     public void displayDetails(){
-
+        System.out.println("Game ID: " + gameId);
+        System.out.println("Title: " + title);
+        System.out.println("Genre: " + genre);
+        System.out.println("Price: $" + price);
     }
 
 }
