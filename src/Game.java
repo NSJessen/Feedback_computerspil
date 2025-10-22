@@ -48,11 +48,13 @@ public class Game {
         this.price = price;
     }
 
-    public void displayDetails() {
-        Tools.printToConsole("Game ID: " + gameId
-                + "\nTitle: " + title
-                + "\nGenre: " + genre
-                + "\nPrice: $" + price);
+    public static void displayDetails(Game game) {
+        Tools.printToConsole("--------------------"
+                + "\nGame ID: " + game.getGameId()
+                + "\nTitle: " + game.getTitle()
+                + "\nGenre: " + game.getGenre()
+                + "\nPrice: $" + game.getPrice()
+                + "\n--------------------");
     }
 
 }

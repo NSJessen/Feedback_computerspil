@@ -127,7 +127,7 @@ public class Main {
             Game game = GameSystem.findGameById(gameId);
             if (game != null) {
                 Tools.printToConsole("Success - game has been found!", true);
-                GameSystem.displayGame(game);
+                Game.displayDetails(game);
                 Tools.waitForUser(input);
                 return;
             }
@@ -138,7 +138,8 @@ public class Main {
     }
 
     private static void promptEditGame() {
-        Tools.titlePrinter("\nEDIT GAME");
+        Tools.printToConsole("");
+        Tools.titlePrinter("EDIT GAME");
 
         System.out.println("Enter Game ID to edit: ");
         int gameId = input.nextInt();
@@ -153,7 +154,7 @@ public class Main {
         }
 
         Tools.printToConsole("Game found: ", true);
-        GameSystem.displayGame(game);
+        Game.displayDetails(game);
 
         System.out.println("New title: ");
         String newTitle = input.nextLine().trim();
@@ -183,7 +184,7 @@ public class Main {
         }
 
         Tools.printToConsole("Game has been updated: ");
-        GameSystem.displayGame(game);
+        Game.displayDetails(game);
         Tools.waitForUser(input);
 
     }

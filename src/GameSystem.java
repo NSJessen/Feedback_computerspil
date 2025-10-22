@@ -45,15 +45,6 @@ public class GameSystem {
 
     }
 
-    public static void displayGame(Game game) {
-        Tools.printToConsole("--------------------"
-                + "\nID: " + game.getGameId()
-                + "\nTitle: " + game.getTitle()
-                + "\nGenre: " + game.getGenre()
-                + "\nPrice: $" + game.getPrice()
-                + "\n--------------------");
-    }
-
     public void displayAllPlayers() {
 
     }
