@@ -107,6 +107,7 @@ public class Main {
                     promptFindGameById();
                     break;
                 case 4:
+                    GameSystem.displayAllGames();
                     promptEditGame();
                     break;
                 default:
@@ -137,7 +138,7 @@ public class Main {
     }
 
     private static void promptEditGame() {
-        Tools.titlePrinter("EDIT GAME", true);
+        Tools.titlePrinter("\nEDIT GAME");
 
         System.out.println("Enter Game ID to edit: ");
         int gameId = input.nextInt();
@@ -151,7 +152,7 @@ public class Main {
             return;
         }
 
-        Tools.printToConsole("Game found: ");
+        Tools.printToConsole("Game found: ", true);
         GameSystem.displayGame(game);
 
         System.out.println("New title: ");

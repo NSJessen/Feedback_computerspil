@@ -11,7 +11,7 @@ public class GameSystem {
     private int playerCount;
 
     private static int usedGameIds = 0;
-    private int usedPlayerIds;
+    private static int usedPlayerIds;
 
     GameSystem(int maxGames, int maxPlayers) {
     }
@@ -22,7 +22,9 @@ public class GameSystem {
 
     }
 
-    public void addPlayer(Player player) {
+    public void addPlayer(String name, int age, double score) {
+        usedPlayerIds++;
+        players.add(new Player((usedPlayerIds), name, age, score));
 
     }
 

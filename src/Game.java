@@ -49,10 +49,10 @@ public class Game {
     }
 
     public void displayDetails() {
-        System.out.println("Game ID: " + gameId);
-        System.out.println("Title: " + title);
-        System.out.println("Genre: " + genre);
-        System.out.println("Price: $" + price);
+        Tools.printToConsole("Game ID: " + gameId
+                + "\nTitle: " + title
+                + "\nGenre: " + genre
+                + "\nPrice: $" + price);
     }
 
 }
