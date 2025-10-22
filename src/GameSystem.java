@@ -13,7 +13,7 @@ public class GameSystem {
     private static int usedGameIds = 0;
     private static int usedPlayerIds;
 
-    GameSystem(int maxGames, int maxPlayers) {
+    private GameSystem(){
     }
 
     public static void addGame(String title, String genre, double price) {
