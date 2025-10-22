@@ -1,5 +1,3 @@
-import javax.tools.Tool;
-import java.lang.runtime.SwitchBootstraps;
 import java.util.Scanner;
 
 
@@ -207,7 +205,7 @@ public class Main {
     }
 
     private static void promptAddGame() {
-        String title = "";
+        String title;
         Tools.titlePrinter("ADD GAME", true);
         do {
             System.out.print("Game title: ");
@@ -218,7 +216,7 @@ public class Main {
         } while (title.isEmpty());
 
 
-        String genre = "";
+        String genre;
         Tools.titlePrinter("ADD GAME", true);
         do {
             System.out.print("Game genre: ");
