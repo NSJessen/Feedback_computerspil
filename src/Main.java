@@ -309,36 +309,46 @@ public class Main {
     private static void promptCalculateBasket() {
         ArrayList<Game> basket = new ArrayList<>();
 
-        while(true){
+        while (true) {
             Tools.clearConsole();
             GameSystem.displayAllGames();
 
-            Tools.printToConsole("Enter the ID of the game you want to add (or 0, to calculate total): ");
+            Tools.printToConsole("\nEnter the ID of the game you want to add (or 0, to calculate total): ");
+            System.out.print("ID: ");
+
             int gameId = input.nextInt();
             input.nextLine();
 
-            if (gameId == 0){
+            if (gameId == 0) {
                 break;
             }
 
             Game selectedGame = GameSystem.findGameById(gameId);
 
-            if (selectedGame == null){
+            if (selectedGame == null) {
                 Tools.printToConsole("No game found with that ID. Try again!");
                 continue;
             }
 
-            Tools.printToConsole("How many copies of \"" + selectedGame.getTitle() + "\" do you want to add?");
+            Tools.printToConsole("How many copies of \"" + selectedGame.getTitle() + "\" do you want to add?", true);
             int quantity = input.nextInt();
             input.nextLine();
 
-            for (int n = 0; n < quantity; n++){
+            for (int n = 0; n < quantity; n++) {
                 basket.add(selectedGame);
             }
 
             Tools.printToConsole(quantity + " x " + selectedGame.getTitle() + " added to basket!");
+            Tools.waitForUser(input);
         }
-
+        Tools.titlePrinter("YOUR BASKET", true);
+        double total = GameSystem.calculateTotalRevenue(basket);
+        for (Game game : basket) {
+            System.out.printf("%-25s $%.2f%n", game.getTitle(), game.getPrice());
+        }
+        Tools.printToConsole("-----------------------------");
+        System.out.printf("TOTAL: $%.2f%n", total);
+        Tools.waitForUser(input);
     }
 
 }
