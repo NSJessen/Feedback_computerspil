@@ -10,8 +10,6 @@ public class Main {
         addInitialPlayers();
 
         promptMainMenu();
-
-
     }
 
     private static void promptMainMenu() {
@@ -73,12 +71,14 @@ public class Main {
                     Tools.waitForUser(input);
                     break;
                 case 2:
-
+                    // ADD promptAddGame method
                     break;
                 case 3:
                     promptFindPlayerById();
+                    break;
                 default:
                     Tools.printToConsole("Invalid input. Try again.");
+                    break;
             }
         }
     }
