@@ -89,9 +89,19 @@ public class GameSystem {
         return sum;
     }
 
-    Player findTopScoringPlayer() {
+    public static Player findTopScoringPlayer() {
+        if (players.isEmpty()){
+            return null;
+        }
 
-        return null;
+        Player topPlayer = players.getFirst();
+
+        for (Player player : players){
+            if (player.getScore() > topPlayer.getScore()){
+                topPlayer = player;
+            }
+        }
+        return topPlayer;
     }
 
 }

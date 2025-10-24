@@ -1,5 +1,3 @@
-import javax.tools.Tool;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -58,6 +56,7 @@ public class Main {
                     1... Display all players
                     2... Add player
                     3... Find player by ID
+                    4... Find top scoring player
                     
                     0... Back to main menu
                     """);
@@ -77,6 +76,9 @@ public class Main {
                     break;
                 case 3:
                     promptFindPlayerById();
+                    break;
+                case 4:
+                    promptFindTopScoringPlayer();
                     break;
                 default:
                     Tools.printToConsole("Invalid input. Try again.");
@@ -348,6 +350,21 @@ public class Main {
         }
         Tools.printToConsole("-----------------------------");
         System.out.printf("TOTAL: $%.2f%n", total);
+        Tools.waitForUser(input);
+    }
+
+    private static void promptFindTopScoringPlayer(){
+        Tools.titlePrinter("TOP SCORING PLAYER", true);
+
+        Player topPlayer = GameSystem.findTopScoringPlayer();
+
+        if (topPlayer == null){
+            Tools.printToConsole("No players found.");
+        } else {
+            Tools.printToConsole("The top scoring player is:", true);
+            Player.displayDetails(topPlayer);
+        }
+
         Tools.waitForUser(input);
     }
 
