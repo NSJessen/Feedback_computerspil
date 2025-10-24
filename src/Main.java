@@ -76,6 +76,10 @@ public class Main {
                 case 3:
                     promptFindPlayerById();
                     break;
+                case 4:
+
+                case 5:
+                    promptUpdatePlayerScore();
                 default:
                     Tools.printToConsole("Invalid input. Try again.");
                     break;
@@ -297,7 +301,20 @@ public class Main {
         } while (!validInput);
 
         GameSystem.addGame(title, genre, price);
+    }
 
+    private static void promptUpdatePlayerScore() {
+
+        GameSystem.displayAllPlayers();
+        System.out.println("Type in the Id of the player you want to update: ");
+        int playerId = input.nextInt();
+        input.nextLine();
+
+        System.out.println("Type in score for: ");
+        double newScore = input.nextDouble();
+        input.nextLine();
+
+        GameSystem.updatePlayerScore(playerId, newScore);
     }
 
 }
