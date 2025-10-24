@@ -13,7 +13,7 @@ public class GameSystem {
     private static int usedGameIds = 0;
     private static int usedPlayerIds;
 
-    private GameSystem(){
+    private GameSystem() {
     }
 
     public static void addGame(String title, String genre, double price) {
@@ -50,7 +50,7 @@ public class GameSystem {
         System.out.printf("%-5s %-25s %-15s %-10s%n", "ID", "Name", "Age", "Score");
         System.out.println("---------------------------------------------------------------");
 
-        for (Player player : players){
+        for (Player player : players) {
             System.out.printf("%-5d %-25s %-15s %8.2f%n",
                     player.getPlayerId(),
                     player.getName(),
@@ -73,16 +73,20 @@ public class GameSystem {
     }
 
     public static Player findPlayerById(int playerId) {
-        for (Player player : players){
+        for (Player player : players) {
             if (player.getPlayerId() == playerId)
                 return player;
         }
         return null;
     }
 
-    double calculateTotalRevenue() {
+    public static double calculateTotalRevenue(ArrayList<Game> basket) {
+        double sum = 0;
 
-        return 0;
+        for (Game game : basket) {
+            sum += game.getPrice();
+        }
+        return sum;
     }
 
     public static Player findTopScoringPlayer() {
