@@ -73,7 +73,7 @@ public class Main {
                     Tools.waitForUser(input);
                     break;
                 case 2:
-                    // ADD promptAddGame method
+                    promptAddPlayer();
                     break;
                 case 3:
                     promptFindPlayerById();
@@ -86,6 +86,61 @@ public class Main {
                     break;
             }
         }
+    }
+
+    private static void promptAddPlayer() {
+        String name;
+        Tools.titlePrinter("ADD PLAYER", true);
+        do {
+            System.out.print("Player name: ");
+            name = input.nextLine().trim();
+
+            if (name.isEmpty()) Tools.printToConsole("Invalid input. Please enter a valid name.");
+
+        } while (name.isEmpty());
+
+
+        int age = 0;
+        Tools.titlePrinter("ADD PLAYER", true);
+        do {
+            System.out.print("Age: ");
+            age = input.nextInt();
+            if (age < 1) Tools.printToConsole("Invalid input. Please enter a valid age.");
+
+        } while (age < 1);
+
+
+        double score = 0.0;
+        boolean validInput = false;
+
+        do {
+            Tools.titlePrinter("ADD PLAYER", true);
+            System.out.print("Player score: ");
+
+            String scoreInput = input.nextLine().trim();
+
+            if (scoreInput.isEmpty()) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
+
+            scoreInput = scoreInput.replace(',', '.');
+
+            try {
+                score = Double.parseDouble(scoreInput);
+                if (score < 0) {
+                    System.out.println("Score cannot be negative. Try again.");
+                } else {
+                    validInput = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+
+        } while (!validInput);
+
+        GameSystem.addPlayer(name, age, score);
+
     }
 
     private static void promptGamesMenu() {
@@ -354,12 +409,12 @@ public class Main {
         Tools.waitForUser(input);
     }
 
-    private static void promptFindTopScoringPlayer(){
+    private static void promptFindTopScoringPlayer() {
         Tools.titlePrinter("TOP SCORING PLAYER", true);
 
         Player topPlayer = GameSystem.findTopScoringPlayer();
 
-        if (topPlayer == null){
+        if (topPlayer == null) {
             Tools.printToConsole("No players found.");
         } else {
             Tools.printToConsole("The top scoring player is:", true);

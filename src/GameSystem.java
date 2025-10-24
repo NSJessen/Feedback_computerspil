@@ -90,14 +90,14 @@ public class GameSystem {
     }
 
     public static Player findTopScoringPlayer() {
-        if (players.isEmpty()){
+        if (players.isEmpty()) {
             return null;
         }
 
         Player topPlayer = players.getFirst();
 
-        for (Player player : players){
-            if (player.getScore() > topPlayer.getScore()){
+        for (Player player : players) {
+            if (player.getScore() > topPlayer.getScore()) {
                 topPlayer = player;
             }
         }
