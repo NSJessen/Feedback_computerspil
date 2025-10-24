@@ -1,3 +1,5 @@
+import javax.tools.Tool;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -91,6 +93,7 @@ public class Main {
                     2... Add game
                     3... Find game by ID
                     4... Edit game
+                    5... Calculate basket
                     
                     0... Back to main menu
                     """);
@@ -114,6 +117,9 @@ public class Main {
                 case 4:
                     GameSystem.displayAllGames();
                     promptEditGame();
+                    break;
+                case 5:
+                    promptCalculateBasket();
                     break;
                 default:
                     Tools.printToConsole("Invalid input. Try again.");
@@ -230,7 +236,7 @@ public class Main {
         GameSystem.addGame("Phasmophobia", "Horror", 13.99);
     }
 
-    private static void addInitialPlayers(){
+    private static void addInitialPlayers() {
         GameSystem.addPlayer("Havre", 26, 1337.69);
         GameSystem.addPlayer("Ravn", 31, 982.45);
         GameSystem.addPlayer("Luna", 22, 1543.10);
@@ -297,6 +303,41 @@ public class Main {
         } while (!validInput);
 
         GameSystem.addGame(title, genre, price);
+
+    }
+
+    private static void promptCalculateBasket() {
+        ArrayList<Game> basket = new ArrayList<>();
+
+        while(true){
+            Tools.clearConsole();
+            GameSystem.displayAllGames();
+
+            Tools.printToConsole("Enter the ID of the game you want to add (or 0, to calculate total): ");
+            int gameId = input.nextInt();
+            input.nextLine();
+
+            if (gameId == 0){
+                break;
+            }
+
+            Game selectedGame = GameSystem.findGameById(gameId);
+
+            if (selectedGame == null){
+                Tools.printToConsole("No game found with that ID. Try again!");
+                continue;
+            }
+
+            Tools.printToConsole("How many copies of \"" + selectedGame.getTitle() + "\" do you want to add?");
+            int quantity = input.nextInt();
+            input.nextLine();
+
+            for (int n = 0; n < quantity; n++){
+                basket.add(selectedGame);
+            }
+
+            Tools.printToConsole(quantity + " x " + selectedGame.getTitle() + " added to basket!");
+        }
 
     }
 
