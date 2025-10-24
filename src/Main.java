@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         addInitialGames();
+        addInitialPlayers();
 
         promptMainMenu();
 
@@ -56,6 +57,7 @@ public class Main {
             Tools.printToConsole("""
                     1... Display all players
                     2... Add player
+                    3... Find player by ID
                     
                     0... Back to main menu
                     """);
@@ -67,13 +69,16 @@ public class Main {
                     return;
 
                 case 1:
-                    // Display players
+                    GameSystem.displayAllPlayers();
+                    Tools.waitForUser(input);
                     break;
                 case 2:
-                    // Add player
+
                     break;
+                case 3:
+                    promptFindPlayerById();
                 default:
-                    // print error message and continue (restart loop)
+                    Tools.printToConsole("Invalid input. Try again.");
             }
         }
     }
@@ -137,6 +142,27 @@ public class Main {
         }
     }
 
+    private static void promptFindPlayerById() {
+        while (true) {
+            Tools.titlePrinter("PLAYER ID SEARCH", true);
+            System.out.print("Player ID: ");
+
+            int playerId = input.nextInt();
+            input.nextLine();
+
+            Player player = GameSystem.findPlayerById(playerId);
+            if (player != null) {
+                Tools.printToConsole("Success - player has been found!", true);
+                Player.displayDetails(player);
+                Tools.waitForUser(input);
+                return;
+            }
+
+            Tools.printToConsole("No player with that ID was found, Try again.");
+            Tools.waitForUser(input);
+        }
+    }
+
     private static void promptEditGame() {
         Tools.printToConsole("");
         Tools.titlePrinter("EDIT GAME");
@@ -188,7 +214,6 @@ public class Main {
         Tools.waitForUser(input);
 
     }
-
 
     private static void addInitialGames() {
         GameSystem.addGame("Minecraft", "Survival", 39.99);

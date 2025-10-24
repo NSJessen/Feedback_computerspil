@@ -48,7 +48,7 @@ public class Player {
         this.score = score;
     }
 
-    public void displayDetails(Player player) {
+    public static void displayDetails(Player player) {
         Tools.printToConsole("--------------------"
                 + "\nPlayer ID: " + player.getPlayerId()
                 + "\nName: " + player.getName()

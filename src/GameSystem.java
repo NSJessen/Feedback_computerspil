@@ -45,8 +45,19 @@ public class GameSystem {
 
     }
 
-    public void displayAllPlayers() {
+    public static void displayAllPlayers() {
 
+        System.out.printf("%-5s %-25s %-15s %-10s%n", "ID", "Name", "Age", "Score");
+        System.out.println("---------------------------------------------------------------");
+
+        for (Player player : players){
+            System.out.printf("%-5d %-25s %-15s %8.2f%n",
+                    player.getPlayerId(),
+                    player.getName(),
+                    player.getAge(),
+                    player.getScore()
+            );
+        }
     }
 
     public void updatePlayerScore(int playerId, double newScore) {
@@ -61,8 +72,11 @@ public class GameSystem {
         return null;
     }
 
-    Player findPlayerById(int playerId) {
-
+    public static Player findPlayerById(int playerId) {
+        for (Player player : players){
+            if (player.getPlayerId() == playerId)
+                return player;
+        }
         return null;
     }
 
