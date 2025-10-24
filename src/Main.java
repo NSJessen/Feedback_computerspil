@@ -80,6 +80,9 @@ public class Main {
                     break;
                 case 4:
                     promptFindTopScoringPlayer();
+              break;
+                case 5:
+                    promptUpdatePlayerScore();
                     break;
                 default:
                     Tools.printToConsole("Invalid input. Try again.");
@@ -361,7 +364,20 @@ public class Main {
         } while (!validInput);
 
         GameSystem.addGame(title, genre, price);
+    }
 
+    private static void promptUpdatePlayerScore() {
+
+        GameSystem.displayAllPlayers();
+        System.out.println("Type in the Id of the player you want to update: ");
+        int playerId = input.nextInt();
+        input.nextLine();
+
+        System.out.println("Type in score for: ");
+        double newScore = input.nextDouble();
+        input.nextLine();
+
+        GameSystem.updatePlayerScore(playerId, newScore);
     }
 
     private static void promptCalculateBasket() {

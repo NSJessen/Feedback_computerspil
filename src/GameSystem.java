@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameSystem {
-    Scanner input = new Scanner(System.in);
+    static Scanner input = new Scanner(System.in);
 
     static ArrayList<Game> games = new ArrayList<>();
     static ArrayList<Player> players = new ArrayList<>();
@@ -60,8 +60,29 @@ public class GameSystem {
         }
     }
 
-    public void updatePlayerScore(int playerId, double newScore) {
+    public static void updatePlayerScore(int playerId, double newScore) {
 
+        Player foundPlayer = null;
+        for (Player player : players) {
+            if (player.getPlayerId() == playerId) {
+                foundPlayer = player;
+                break;
+            }
+        }
+
+        if (foundPlayer == null) {
+            System.out.println("Player " + playerId + " not found!");
+            return;
+        }
+
+        if (newScore >= 0) {
+          foundPlayer.setScore(newScore);
+          System.out.println("Score updated successfully!");
+          displayAllPlayers();
+          Tools.waitForUser(input);
+        } else {
+          System.out.println("Score can't be negative.");
+        }
     }
 
     public static Game findGameById(int gameId) {
