@@ -57,7 +57,4 @@ public class Player {
                 + "\n--------------------");
     }
 
-    public void updateScore(double newScore) {
-        this.score = newScore;
-    }
 }
