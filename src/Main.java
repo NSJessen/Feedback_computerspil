@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -56,6 +57,7 @@ public class Main {
                     1... Display all players
                     2... Add player
                     3... Find player by ID
+                    4... Find top scoring player
                     
                     0... Back to main menu
                     """);
@@ -71,20 +73,77 @@ public class Main {
                     Tools.waitForUser(input);
                     break;
                 case 2:
-                    // ADD promptAddGame method
+                    promptAddPlayer();
                     break;
                 case 3:
                     promptFindPlayerById();
                     break;
                 case 4:
-
+                    promptFindTopScoringPlayer();
+              break;
                 case 5:
                     promptUpdatePlayerScore();
+                    break;
                 default:
                     Tools.printToConsole("Invalid input. Try again.");
                     break;
             }
         }
+    }
+
+    private static void promptAddPlayer() {
+        String name;
+        Tools.titlePrinter("ADD PLAYER", true);
+        do {
+            System.out.print("Player name: ");
+            name = input.nextLine().trim();
+
+            if (name.isEmpty()) Tools.printToConsole("Invalid input. Please enter a valid name.");
+
+        } while (name.isEmpty());
+
+
+        int age = 0;
+        Tools.titlePrinter("ADD PLAYER", true);
+        do {
+            System.out.print("Age: ");
+            age = input.nextInt();
+            if (age < 1) Tools.printToConsole("Invalid input. Please enter a valid age.");
+
+        } while (age < 1);
+
+
+        double score = 0.0;
+        boolean validInput = false;
+
+        do {
+            Tools.titlePrinter("ADD PLAYER", true);
+            System.out.print("Player score: ");
+
+            String scoreInput = input.nextLine().trim();
+
+            if (scoreInput.isEmpty()) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
+
+            scoreInput = scoreInput.replace(',', '.');
+
+            try {
+                score = Double.parseDouble(scoreInput);
+                if (score < 0) {
+                    System.out.println("Score cannot be negative. Try again.");
+                } else {
+                    validInput = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+
+        } while (!validInput);
+
+        GameSystem.addPlayer(name, age, score);
+
     }
 
     private static void promptGamesMenu() {
@@ -95,6 +154,7 @@ public class Main {
                     2... Add game
                     3... Find game by ID
                     4... Edit game
+                    5... Calculate basket
                     
                     0... Back to main menu
                     """);
@@ -118,6 +178,9 @@ public class Main {
                 case 4:
                     GameSystem.displayAllGames();
                     promptEditGame();
+                    break;
+                case 5:
+                    promptCalculateBasket();
                     break;
                 default:
                     Tools.printToConsole("Invalid input. Try again.");
@@ -234,7 +297,7 @@ public class Main {
         GameSystem.addGame("Phasmophobia", "Horror", 13.99);
     }
 
-    private static void addInitialPlayers(){
+    private static void addInitialPlayers() {
         GameSystem.addPlayer("Havre", 26, 1337.69);
         GameSystem.addPlayer("Ravn", 31, 982.45);
         GameSystem.addPlayer("Luna", 22, 1543.10);
@@ -315,6 +378,66 @@ public class Main {
         input.nextLine();
 
         GameSystem.updatePlayerScore(playerId, newScore);
+    }
+
+    private static void promptCalculateBasket() {
+        ArrayList<Game> basket = new ArrayList<>();
+
+        while (true) {
+            Tools.clearConsole();
+            GameSystem.displayAllGames();
+
+            Tools.printToConsole("\nEnter the ID of the game you want to add (or 0, to calculate total): ");
+            System.out.print("ID: ");
+
+            int gameId = input.nextInt();
+            input.nextLine();
+
+            if (gameId == 0) {
+                break;
+            }
+
+            Game selectedGame = GameSystem.findGameById(gameId);
+
+            if (selectedGame == null) {
+                Tools.printToConsole("No game found with that ID. Try again!");
+                continue;
+            }
+
+            Tools.printToConsole("How many copies of \"" + selectedGame.getTitle() + "\" do you want to add?", true);
+            int quantity = input.nextInt();
+            input.nextLine();
+
+            for (int n = 0; n < quantity; n++) {
+                basket.add(selectedGame);
+            }
+
+            Tools.printToConsole(quantity + " x " + selectedGame.getTitle() + " added to basket!");
+            Tools.waitForUser(input);
+        }
+        Tools.titlePrinter("YOUR BASKET", true);
+        double total = GameSystem.calculateTotalRevenue(basket);
+        for (Game game : basket) {
+            System.out.printf("%-25s $%.2f%n", game.getTitle(), game.getPrice());
+        }
+        Tools.printToConsole("-----------------------------");
+        System.out.printf("TOTAL: $%.2f%n", total);
+        Tools.waitForUser(input);
+    }
+
+    private static void promptFindTopScoringPlayer() {
+        Tools.titlePrinter("TOP SCORING PLAYER", true);
+
+        Player topPlayer = GameSystem.findTopScoringPlayer();
+
+        if (topPlayer == null) {
+            Tools.printToConsole("No players found.");
+        } else {
+            Tools.printToConsole("The top scoring player is:", true);
+            Player.displayDetails(topPlayer);
+        }
+
+        Tools.waitForUser(input);
     }
 
 }

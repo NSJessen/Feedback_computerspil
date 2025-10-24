@@ -94,21 +94,35 @@ public class GameSystem {
     }
 
     public static Player findPlayerById(int playerId) {
-        for (Player player : players){
+        for (Player player : players) {
             if (player.getPlayerId() == playerId)
                 return player;
         }
         return null;
     }
 
-    double calculateTotalRevenue() {
+    public static double calculateTotalRevenue(ArrayList<Game> basket) {
+        double sum = 0;
 
-        return 0;
+        for (Game game : basket) {
+            sum += game.getPrice();
+        }
+        return sum;
     }
 
-    Player findTopScoringPlayer() {
+    public static Player findTopScoringPlayer() {
+        if (players.isEmpty()) {
+            return null;
+        }
 
-        return null;
+        Player topPlayer = players.getFirst();
+
+        for (Player player : players) {
+            if (player.getScore() > topPlayer.getScore()) {
+                topPlayer = player;
+            }
+        }
+        return topPlayer;
     }
 
 }
