@@ -1,11 +1,7 @@
-import java.util.Scanner;
-
 public class Player {
-    Scanner input = new Scanner(System.in);
-
-    private int playerId;
-    private String name;
-    private int age;
+    private final int playerId;
+    private final String name;
+    private final int age;
     private double score;
 
     public Player(int playerId, String name, int age, double score) {
@@ -20,24 +16,12 @@ public class Player {
         return playerId;
     }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getAge() {
         return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public double getScore() {

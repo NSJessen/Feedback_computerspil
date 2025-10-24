@@ -58,6 +58,7 @@ public class Main {
                     2... Add player
                     3... Find player by ID
                     4... Find top scoring player
+                    5... Update player score
                     
                     0... Back to main menu
                     """);
@@ -80,7 +81,7 @@ public class Main {
                     break;
                 case 4:
                     promptFindTopScoringPlayer();
-              break;
+                    break;
                 case 5:
                     promptUpdatePlayerScore();
                     break;
@@ -103,7 +104,7 @@ public class Main {
         } while (name.isEmpty());
 
 
-        int age = 0;
+        int age;
         Tools.titlePrinter("ADD PLAYER", true);
         do {
             System.out.print("Age: ");

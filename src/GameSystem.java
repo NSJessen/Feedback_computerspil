@@ -7,9 +7,6 @@ public class GameSystem {
     static ArrayList<Game> games = new ArrayList<>();
     static ArrayList<Player> players = new ArrayList<>();
 
-    private int gameCount;
-    private int playerCount;
-
     private static int usedGameIds = 0;
     private static int usedPlayerIds;
 
@@ -76,12 +73,12 @@ public class GameSystem {
         }
 
         if (newScore >= 0) {
-          foundPlayer.setScore(newScore);
-          System.out.println("Score updated successfully!");
-          displayAllPlayers();
-          Tools.waitForUser(input);
+            foundPlayer.setScore(newScore);
+            System.out.println("Score updated successfully!");
+            displayAllPlayers();
+            Tools.waitForUser(input);
         } else {
-          System.out.println("Score can't be negative.");
+            System.out.println("Score can't be negative.");
         }
     }
 

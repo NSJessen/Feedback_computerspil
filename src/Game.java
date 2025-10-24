@@ -1,9 +1,6 @@
-import java.util.Scanner;
-
 public class Game {
-    Scanner input = new Scanner(System.in);
 
-    private int gameId;
+    private final int gameId;
     private String title;
     private String genre;
     private double price;
@@ -18,10 +15,6 @@ public class Game {
 
     public int getGameId() {
         return gameId;
-    }
-
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
     }
 
     public String getTitle() {
