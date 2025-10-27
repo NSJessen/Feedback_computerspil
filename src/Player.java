@@ -41,4 +41,15 @@ public class Player {
                 + "\n--------------------");
     }
 
+    @Override
+    public String toString() {
+        return String.format(
+                "🧍 Player #%d%n" +
+                        "   • Name: %s%n" +
+                        "   • Age: %d%n" +
+                        "   • Score: %.2f",
+                playerId, name, age, score
+        );
+    }
+
 }
