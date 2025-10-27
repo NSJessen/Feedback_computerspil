@@ -50,4 +50,14 @@ public class Game {
                 + "\n--------------------");
     }
 
+    @Override
+    public String toString() {
+        return String.format(
+                "🎮 Game #%d%n" +
+                        "   • Title: %s%n" +
+                        "   • Genre: %s%n" +
+                        "   • Price: $%.2f",
+                gameId, title, genre, price
+        );
+    }
 }

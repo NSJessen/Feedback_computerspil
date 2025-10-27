@@ -1,63 +1,92 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class GameSystem {
-    static Scanner input = new Scanner(System.in);
 
-    static ArrayList<Game> games = new ArrayList<>();
-    static ArrayList<Player> players = new ArrayList<>();
+    private Game[] games;
+    private Player[] players;
 
     private static int usedGameIds = 0;
     private static int usedPlayerIds;
 
-    private GameSystem() {
+    public GameSystem() {
+        this.games = new Game[0];
+        this.players = new Player[0];
+
     }
 
-    public static void addGame(String title, String genre, double price) {
+    public void addGame(String title, String genre, double price) {
         usedGameIds++;
-        games.add(new Game((usedGameIds), title, genre, price));
+        Game newGame = new Game(usedGameIds, title, genre, price);
+
+        Game[] newGames = new Game[games.length + 1];
+
+        for (int i = 0; i < games.length; i++) {
+            newGames[i] = games[i];
+        }
+
+        newGames[newGames.length - 1] = newGame;
+        games = newGames;
 
     }
 
-    public static void addPlayer(String name, int age, double score) {
+    public void addPlayer(String name, int age, double score) {
         usedPlayerIds++;
-        players.add(new Player((usedPlayerIds), name, age, score));
+        Player newPlayer = new Player(usedPlayerIds, name, age, score);
 
+        Player[] newPlayers = new Player[players.length + 1];
+        for (int i = 0; i < players.length; i++) {
+            newPlayers[i] = players[i];
+        }
+
+        newPlayers[newPlayers.length - 1] = newPlayer;
+        players = newPlayers;
     }
 
-    public static void displayAllGames() {
+    public String displayAllGames() {
+        StringBuilder sb = new StringBuilder();
 
-        System.out.printf("%-5s %-25s %-15s %-10s%n", "ID", "Title", "Genre", "Price ($)");
-        System.out.println("---------------------------------------------------------------");
+        sb.append("\n🎮================= GAME LIBRARY =================🎮\n");
+        sb.append(String.format("%-5s %-25s %-15s %-10s%n", "🆔", "🎯 Title", "🎭 Genre", "💰 Price"));
+        sb.append("---------------------------------------------------------------\n");
 
         for (Game game : games) {
-            System.out.printf(
+            sb.append(String.format(
                     "%-5d %-25s %-15s $%8.2f%n",
                     game.getGameId(),
                     game.getTitle(),
                     game.getGenre(),
                     game.getPrice()
-            );
+            ));
         }
 
+        sb.append("===============================================================\n");
+
+        return sb.toString();
     }
 
-    public static void displayAllPlayers() {
+    public String displayAllPlayers() {
+        StringBuilder sb = new StringBuilder();
 
-        System.out.printf("%-5s %-25s %-15s %-10s%n", "ID", "Name", "Age", "Score");
-        System.out.println("---------------------------------------------------------------");
+        sb.append("\n👥================= PLAYER ROSTER =================👥\n");
+        sb.append(String.format("%-5s %-25s %-15s %-10s%n", "🆔", "🧍 Name", "🎂 Age", "🏆 Score"));
+        sb.append("---------------------------------------------------------------\n");
 
         for (Player player : players) {
-            System.out.printf("%-5d %-25s %-15s %8.2f%n",
+            sb.append(String.format(
+                    "%-5d %-25s %-15d %8.2f%n",
                     player.getPlayerId(),
                     player.getName(),
                     player.getAge(),
                     player.getScore()
-            );
+            ));
         }
+
+        sb.append("===============================================================\n");
+
+        return sb.toString();
     }
 
-    public static void updatePlayerScore(int playerId, double newScore) {
+    public String updatePlayerScore(int playerId, double newScore) {
 
         Player foundPlayer = null;
         for (Player player : players) {
@@ -68,21 +97,19 @@ public class GameSystem {
         }
 
         if (foundPlayer == null) {
-            System.out.println("Player " + playerId + " not found!");
-            return;
+            return "Player " + playerId + " not found!";
+
         }
 
         if (newScore >= 0) {
             foundPlayer.setScore(newScore);
-            System.out.println("Score updated successfully!");
-            displayAllPlayers();
-            Tools.waitForUser(input);
+            return "✅ Score updated successfully!";
         } else {
-            System.out.println("Score can't be negative.");
+            return "Score can't be negative.";
         }
     }
 
-    public static Game findGameById(int gameId) {
+    public Game findGameById(int gameId) {
         for (Game game : games) {
             if (game.getGameId() == gameId)
                 return game;
@@ -90,7 +117,7 @@ public class GameSystem {
         return null;
     }
 
-    public static Player findPlayerById(int playerId) {
+    public Player findPlayerById(int playerId) {
         for (Player player : players) {
             if (player.getPlayerId() == playerId)
                 return player;
@@ -98,7 +125,7 @@ public class GameSystem {
         return null;
     }
 
-    public static double calculateTotalRevenue(ArrayList<Game> basket) {
+    public double calculateTotalRevenue(ArrayList<Game> basket) {
         double sum = 0;
 
         for (Game game : basket) {
@@ -107,12 +134,12 @@ public class GameSystem {
         return sum;
     }
 
-    public static Player findTopScoringPlayer() {
-        if (players.isEmpty()) {
+    public Player findTopScoringPlayer() {
+        if (players == null || players.length == 0) {
             return null;
         }
 
-        Player topPlayer = players.getFirst();
+        Player topPlayer = players[0];
 
         for (Player player : players) {
             if (player.getScore() > topPlayer.getScore()) {
